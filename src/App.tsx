@@ -1,5 +1,7 @@
 import React from 'react';
 
-const App: React.FC = () => <h1>Plan your trip!</h1>;
+import Search from './views/search';
+
+const App: React.FC = () => <Search />;
 
 export default App;
