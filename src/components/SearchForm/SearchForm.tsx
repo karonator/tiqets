@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { TStore } from '../../redux/store';
 import { useAppDispatch } from '../../hooks';
 
 import {
+  fetchProducts,
   setSelectedCountry,
   setSelectedCity,
   setSelectedDate
@@ -29,6 +30,15 @@ const SearchForm = (): JSX.Element => {
     selectedCity,
     selectedDate
   } = searchData;
+
+  useEffect(() => {
+    if (selectedCity && selectedDate) {
+      dispatch(fetchProducts({
+        city: selectedCity,
+        date: selectedDate
+      }));
+    }
+  }, [selectedCity, selectedDate]);
 
   return (
     <SSearchForm>

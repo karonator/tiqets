@@ -2,13 +2,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
   ICountry,
-  ICity
+  ICity,
+  IProduct
 } from '../../types';
 
 import {
   IRawLocationData,
   fetchLocations,
-  fetchDates
+  fetchDates,
+  fetchProducts,
+  NetworkError
 } from './actions';
 
 export interface ISearchData {
@@ -16,8 +19,10 @@ export interface ISearchData {
   rawCities: Record<string, ICity[]>;
   cities: ICity[];
   dates: string[];
+  products?: IProduct[];
 
   loading: boolean;
+  error?: string;
 
   selectedCountry?: string;
   selectedCity?: string;
@@ -41,9 +46,13 @@ const searchDataSlice = createSlice({
       state.cities = payload ? state.rawCities[payload] : [];
       state.selectedCountry = payload;
       state.selectedCity = undefined;
+      state.selectedDate = undefined;
+      state.products = undefined;
     },
     setSelectedCity(state, { payload }: PayloadAction<string | undefined>) {
       state.selectedCity = payload;
+      state.selectedDate = undefined;
+      state.products = undefined;
     },
     setSelectedDate(state, { payload }: PayloadAction<string | undefined>) {
       state.selectedDate = payload;
@@ -65,9 +74,11 @@ const searchDataSlice = createSlice({
           }));
         });
       })
-      .addCase(fetchLocations.rejected, (state, action: PayloadAction<unknown>) => {
+      .addCase(fetchLocations.rejected, (state, action) => {
         state.loading = false;
-        // log action.payload later...
+
+        const error = action.payload as NetworkError;
+        state.error = error.errorMessage;
       })
       .addCase(fetchDates.pending, (state) => {
         state.loading = true;
@@ -78,7 +89,22 @@ const searchDataSlice = createSlice({
       })
       .addCase(fetchDates.rejected, (state, action: PayloadAction<unknown>) => {
         state.loading = false;
-        // log action.payload later...
+
+        const error = action.payload as NetworkError;
+        state.error = error.errorMessage;
+      })
+      .addCase(fetchProducts.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchProducts.fulfilled, (state, { payload }: PayloadAction<IProduct[]>) => {
+        state.loading = false;
+        state.products = payload;
+      })
+      .addCase(fetchProducts.rejected, (state, action: PayloadAction<unknown>) => {
+        state.loading = false;
+
+        const error = action.payload as NetworkError;
+        state.error = error.errorMessage;
       });
   }
 });

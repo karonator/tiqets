@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 
-const useWidth = (elementRef: React.RefObject<HTMLDivElement>) => {
+const useWidth = (elementRef: React.RefObject<HTMLDivElement>):(number | null)[] => {
   const [resultWidth, setResultWidth] = useState<number | null>(null);
 
   const updateWidth = useCallback(() => {

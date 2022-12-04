@@ -10,6 +10,7 @@ import {
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SearchForm from '../components/SearchForm';
+import SearchResults from '../components/SearchResults';
 
 const Search: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +24,7 @@ const Search: React.FC = () => {
     <>
       <Header />
       <SearchForm />
+      <SearchResults />
       <Footer />
     </>
   );

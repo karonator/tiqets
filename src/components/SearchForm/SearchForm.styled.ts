@@ -18,4 +18,8 @@ export const SSearchFormRow = styled.div`
       row-gap: 0;
     }
   }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 `;
