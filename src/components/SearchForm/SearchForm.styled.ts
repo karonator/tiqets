@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const SSearchForm = styled.section`
-  max-width: 1024px;
+  max-width: 800px;
   margin: auto;
   padding: 24px 16px;
 `;
@@ -12,8 +12,10 @@ export const SSearchFormRow = styled.div`
   margin-bottom: 16px;
   row-gap: 16px;
 
-  @media (min-width: 600px) {
-    grid-template-columns: 1fr 1fr;
-    row-gap: 0;
+  &:first-of-type {
+    @media (min-width: 600px) {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 0;
+    }
   }
 `;

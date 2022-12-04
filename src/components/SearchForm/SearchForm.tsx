@@ -6,7 +6,8 @@ import { useAppDispatch } from '../../hooks';
 
 import {
   setSelectedCountry,
-  setSelectedCity
+  setSelectedCity,
+  setSelectedDate
 } from '../../redux/search';
 
 import {
@@ -15,6 +16,7 @@ import {
 } from './SearchForm.styled';
 
 import DropdownSelect from '../DropdownSelect';
+import DatePicker from '../DatePicker';
 
 const SearchForm = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -22,8 +24,10 @@ const SearchForm = (): JSX.Element => {
   const {
     countries,
     cities,
+    dates,
     selectedCountry,
-    selectedCity
+    selectedCity,
+    selectedDate
   } = searchData;
 
   return (
@@ -49,7 +53,13 @@ const SearchForm = (): JSX.Element => {
         />
       </SSearchFormRow>
       <SSearchFormRow>
-        222
+        <DatePicker
+          label="Date"
+          dates={dates}
+          disabled={selectedCity === undefined}
+          value={selectedDate}
+          setValue={setSelectedDate}
+        />
       </SSearchFormRow>
     </SSearchForm>
   );

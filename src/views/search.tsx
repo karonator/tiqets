@@ -3,7 +3,8 @@ import React, { useEffect } from 'react';
 import { useAppDispatch } from '../hooks';
 
 import {
-  fetchLocations
+  fetchLocations,
+  fetchDates
 } from '../redux/search';
 
 import Header from '../components/Header';
@@ -15,6 +16,7 @@ const Search: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchLocations());
+    dispatch(fetchDates());
   }, []);
 
   return (
