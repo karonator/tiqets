@@ -13,7 +13,7 @@ export const SDatePickerDates = styled.div`
   display: flex;
 `;
 
-export const SDatePickerDate = styled.button`
+export const SDatePickerDate = styled.button<{ selected?: boolean }>`
   background: #FFF;
   border-radius: 8px;
   border: 1px solid #000;
@@ -23,9 +23,16 @@ export const SDatePickerDate = styled.button`
   text-align: center;
   transition: 0.3s all;
 
-  &:hover {
-    background: #EEE;
-  }
+  ${({ selected }) => !selected && `
+    &:hover {
+      background: #EEE;
+    }
+  `}
+
+  ${({ selected }) => selected && `
+    background: #9B51E0;
+    color: #FFF;
+  `}
 `;
 
 export const SDatePickerDateWeekday = styled.div`

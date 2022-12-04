@@ -58,7 +58,11 @@ const DatePicker = (props: DatePickerProps): JSX.Element => {
       const itemCount = Math.max(3, Math.floor(containerWidth / minItemSize));
 
       const rendered = parseDates(dates).slice(0, itemCount).map((date: ParsedDate) => (
-        <SDatePickerDate key={date.raw}>
+        <SDatePickerDate
+          key={date.raw}
+          selected={value === date.raw}
+          onClick={() => setValue(date.raw)}
+        >
           <SDatePickerDateWeekday>
             { date.weekday }
           </SDatePickerDateWeekday>

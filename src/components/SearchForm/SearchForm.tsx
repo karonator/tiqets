@@ -58,7 +58,7 @@ const SearchForm = (): JSX.Element => {
           dates={dates}
           disabled={selectedCity === undefined}
           value={selectedDate}
-          setValue={setSelectedDate}
+          setValue={(val) => dispatch(setSelectedDate(val))}
         />
       </SSearchFormRow>
     </SSearchForm>
