@@ -1,14 +1,22 @@
 import React from 'react';
 
+import {
+  SDropdown,
+  SDropdownLabel,
+  SDropdownSelect
+} from './DropdownSelect.styled';
+
 interface DropdownOption {
   title: string;
   value: string;
 }
 
 interface DropdownSelectProps {
-  label: string;
   id: string;
+  label: string;
+  selectValueTitle: string;
   options: DropdownOption[];
+  disabled?: boolean;
 
   value?: string;
   setValue: (value?: string) => void;
@@ -16,9 +24,11 @@ interface DropdownSelectProps {
 
 const DropdownSelect = (props: DropdownSelectProps): JSX.Element => {
   const {
-    label,
     id,
+    label,
+    selectValueTitle,
     options,
+    disabled = false,
     value,
     setValue
   } = props;
@@ -32,21 +42,21 @@ const DropdownSelect = (props: DropdownSelectProps): JSX.Element => {
   };
 
   return (
-    <div>
-      <label htmlFor={id}>
+    <SDropdown disabled={disabled}>
+      <SDropdownLabel htmlFor={id}>
         { label }
-      </label>
-      <select value={value} onChange={onChange}>
+      </SDropdownLabel>
+      <SDropdownSelect value={value} onChange={onChange}>
         <option value={-1}>
-          zzz
+          { selectValueTitle }
         </option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.title}
           </option>
         ))}
-      </select>
-    </div>
+      </SDropdownSelect>
+    </SDropdown>
   );
 };
 
