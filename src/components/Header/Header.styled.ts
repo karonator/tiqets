@@ -32,3 +32,10 @@ export const SLoader = styled.div<{ show?: boolean }>`
     100% { transform: rotate(360deg); }
   }
 `;
+
+export const SError = styled.div`
+  background: ${({ theme }) => theme.colors.errorBackground};
+  color: ${({ theme }) => theme.colors.errorTextColor};
+  font: normal 400 14px ${({ theme }) => theme.fonts};
+  padding: 20px 10px;
+`;

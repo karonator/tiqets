@@ -17,7 +17,10 @@ const theme = {
     cardBackground: '#1e272e',
     cardTextColor: '#FFF',
 
-    sectionBorder: '#DDD'
+    sectionBorder: '#DDD',
+
+    errorBackground: '#C23616',
+    errorTextColor: '#FFF'
   },
   breakpoints: {
     screenSm: 550

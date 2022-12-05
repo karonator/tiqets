@@ -2,14 +2,13 @@ import React, { ReactElement, useEffect, useState } from 'react';
 
 import { useSelector } from 'react-redux';
 
-import { TStore } from '../../redux/store';
+import { searchSliceSelector } from '../../redux/selectors';
 
-import { SHeader, SLoader } from './Header.styled';
+import { SHeader, SLoader, SError } from './Header.styled';
 
 const Header = (): ReactElement => {
-  const searchData = useSelector((state: TStore) => state.searchDataReducer);
+  const { loading, error } = useSelector(searchSliceSelector);
 
-  const { loading } = searchData;
   const [showLoader, setShowLoader] = useState<boolean>(false);
 
   useEffect(() => {
@@ -21,10 +20,17 @@ const Header = (): ReactElement => {
   }, [loading]);
 
   return (
-    <SHeader>
-      Plan your trip!
-      <SLoader show={showLoader} />
-    </SHeader>
+    <>
+      <SHeader>
+        Plan your trip!
+        <SLoader show={showLoader} />
+      </SHeader>
+      {error && (
+        <SError>
+          { error }
+        </SError>
+      )}
+    </>
   );
 };
 

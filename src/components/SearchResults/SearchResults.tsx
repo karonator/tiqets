@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 
-import { TStore } from '../../redux/store';
+import { searchSliceSelector } from '../../redux/selectors';
 
 import ProductCard from '../ProductCard';
 
@@ -12,8 +12,7 @@ import {
 } from './SearchResults.styled';
 
 const SearchResults = (): ReactElement => {
-  const searchData = useSelector((state: TStore) => state.searchDataReducer);
-  const { products } = searchData;
+  const { products } = useSelector(searchSliceSelector);
 
   return (
     <SSearchResultsContainer>

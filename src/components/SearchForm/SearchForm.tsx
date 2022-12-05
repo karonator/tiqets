@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback, ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 
-import { TStore } from '../../redux/store';
+import { searchSliceSelector } from '../../redux/selectors';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 import {
@@ -21,7 +21,6 @@ import DatePicker from '../DatePicker';
 
 const SearchForm = (): ReactElement => {
   const dispatch = useAppDispatch();
-  const searchData = useSelector((state: TStore) => state.searchDataReducer);
   const {
     countries,
     cities,
@@ -29,7 +28,7 @@ const SearchForm = (): ReactElement => {
     selectedCountry,
     selectedCity,
     selectedDate
-  } = searchData;
+  } = useSelector(searchSliceSelector);
 
   useEffect(() => {
     if (selectedCity && selectedDate) {

@@ -18,6 +18,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": 1,
     "@typescript-eslint/comma-dangle": ["error", "never"],
     "@typescript-eslint/space-before-blocks": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/function-component-definition": [
       2,
       {
