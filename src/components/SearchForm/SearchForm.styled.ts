@@ -13,7 +13,7 @@ export const SSearchFormRow = styled.div`
   row-gap: 16px;
 
   &:first-of-type {
-    @media (min-width: 600px) {
+    @media (min-width: ${({ theme }) => theme.breakpoints.screenSm}px) {
       grid-template-columns: 1fr 1fr;
       row-gap: 0;
     }

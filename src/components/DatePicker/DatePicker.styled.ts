@@ -14,33 +14,34 @@ export const SDatePickerDates = styled.div`
 `;
 
 export const SDatePickerDate = styled.button<{ selected?: boolean }>`
-  background: #FFF;
+  background-color: ${({ theme }) => theme.colors.inputBackground};
+  color: ${({ theme }) => theme.colors.inputTextColor};
   border-radius: 8px;
-  border: 1px solid #000;
+  border: 1px solid ${({ theme }) => theme.colors.inputBorder};
   cursor: pointer;
   flex: 1;
   padding: 14px 0px;
   text-align: center;
   transition: 0.3s all;
 
-  ${({ selected }) => !selected && `
+  ${({ selected, theme }) => !selected && `
     &:hover {
-      background: #EEE;
+      background: ${theme.colors.dateButtonBackgroundHover};
     }
   `}
 
-  ${({ selected }) => selected && `
-    background: #9B51E0;
-    color: #FFF;
+  ${({ selected, theme }) => selected && `
+    background: ${theme.colors.dateButtonSelectedBackground};
+    color: ${theme.colors.dateButtonSelectedTextColor};
   `}
 `;
 
 export const SDatePickerDateWeekday = styled.div`
-  font: normal 400 12px 'Roboto Mono', Verdana;
+  font: normal 400 12px ${({ theme }) => theme.fonts};
 `;
 
 export const SDatePickerDateDay = styled.div`
-  font: normal 500 24px 'Roboto Mono', Verdana;
+  font: normal 500 24px ${({ theme }) => theme.fonts};
   line-height: 32px;
 `;
 
@@ -49,7 +50,7 @@ export const SDatePickerSeparator = styled.div`
   width: 1px;
 
   &::after {
-    background-color: #000;
+    background-color: ${({ theme }) => theme.colors.inputBorder};
     content: ' ';
     height: 40px;
     left: 0;

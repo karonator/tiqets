@@ -14,27 +14,29 @@ export const SDropdown = styled.div<{ disabled?: boolean }>`
 `;
 
 export const SDropdownLabel = styled.label`
-  font: normal 400 12px 'Roboto Mono', Verdana;
+  font: normal 400 12px ${({ theme }) => theme.fonts};
   letter-spacing: 1px;
   margin-bottom: 8px;
   text-transform: uppercase;
 `;
 
 export const SDropdownSelect = styled.select`
+  background-color: ${({ theme }) => theme.colors.inputBackground};
   background-image: url(${arrow});
-  background-size: 10px 5px;
-  background-repeat: no-repeat;
   background-position-x: calc(100% - 12px);
   background-position-y: center;
+  background-repeat: no-repeat;
+  background-size: 10px 5px;
 
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance:none;
 
   border-radius: 8px;
-  border: 1px solid black;
+  border: 1px solid ${({ theme }) => theme.colors.inputBorder};
+  color: ${({ theme }) => theme.colors.inputTextColor};
   cursor: pointer;
-  font: normal 500 16px 'Roboto Mono', Verdana;
+  font: normal 500 16px ${({ theme }) => theme.fonts};
   line-height: 24px;
   padding: 16px 44px 16px 12px;
 `;

@@ -7,7 +7,7 @@ export const SProduct = styled.div`
   flex-direction: row;
   overflow: hidden;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.screenSm}px) {
     flex-direction: column;
   }
 `;
@@ -19,7 +19,7 @@ export const SProductImageWrapper = styled.div`
   height: 100%;
   position: relative;
   
-  @media (min-width: 600px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.screenSm}px) {
     aspect-ratio: 3/2;
     width: 100%;
     flex: unset;
@@ -40,7 +40,7 @@ export const SProductImagePlaceholder = styled.div`
   height: 100%;
   flex: 0;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.screenSm}px) {
     aspect-ratio: 3/2;
     width: 100%;
     flex: unset;
@@ -49,10 +49,12 @@ export const SProductImagePlaceholder = styled.div`
 
 export const SProductContent = styled.div`
   padding: 16px;
+  color: ${({ theme }) => theme.colors.cardTextColor};
+  background-color: ${({ theme }) => theme.colors.cardBackground};
 `;
 
 export const SProductTitle = styled.h3`
-  font: normal 500 16px 'Roboto Mono', Verdana;
+  font: normal 500 16px ${({ theme }) => theme.fonts};
   line-height: 20px;
   margin-bottom: 8px;
   min-height: 40px;
@@ -62,15 +64,15 @@ export const SProductTitle = styled.h3`
   -webkit-box-orient: vertical;
   overflow: hidden;
 
-  @media (min-width: 600px) {
-    font: normal 500 18px 'Roboto Mono', Verdana;
+  @media (min-width: ${({ theme }) => theme.breakpoints.screenSm}px) {
+    font: normal 500 18px ${({ theme }) => theme.fonts};
     line-height: 24px;
     min-height: 48px;
   }
 `;
 
 export const SProductDescription = styled.p`
-  font: normal 400 12px 'Roboto Mono', Verdana;
+  font: normal 400 12px ${({ theme }) => theme.fonts};
   line-height: 16px;
   margin-bottom: 12px;
 
@@ -79,7 +81,7 @@ export const SProductDescription = styled.p`
   -webkit-box-orient: vertical;
   overflow: hidden;
 
-  @media (min-width: 600px) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.screenSm}px) {
     margin-bottom: 16px;
   }
 `;
@@ -89,22 +91,22 @@ export const SProductPriceWrapper = styled.div`
 `;
 
 const SProductPriceBase = styled.p`
-  font: normal 500 14px 'Roboto Mono', Verdana;
+  font: normal 500 14px ${({ theme }) => theme.fonts};
   line-height: 20px;
 
-  @media (min-width: 600px) {
-    font: normal 500 16px 'Roboto Mono', Verdana;
+  @media (min-width: ${({ theme }) => theme.breakpoints.screenSm}px) {
+    font: normal 500 16px ${({ theme }) => theme.fonts};
     line-height: 24px;
   }
 `;
 
 export const SProductPrice = styled(SProductPriceBase)<{ discounted?: boolean }>`
-  ${({ discounted }) => discounted && `
-    font: normal 400 14px 'Roboto Mono', Verdana;
+  ${({ discounted, theme }) => discounted && `
+    font: normal 400 14px ${theme.fonts};
     color: #555;
     text-decoration: line-through;
 
-    @media (min-width: 600px) {
+    @media (min-width: ${theme.breakpoints.screenSm}px) {
       line-height: 24px;
     }
   `}
