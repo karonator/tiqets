@@ -48,13 +48,9 @@ const DatePicker = (props: DatePickerProps): ReactElement => {
       const itemCount = Math.max(3, Math.floor(containerWidth / minItemSize));
 
       const rendered = parseDates(dates).slice(0, itemCount).map((date: ParsedDate) => (
-        <>
+        <React.Fragment key={date.raw}>
           {date.day === 1 && <SDatePickerSeparator />}
-          <SDatePickerDate
-            key={date.raw}
-            selected={value === date.raw}
-            onClick={() => setValue(date.raw)}
-          >
+          <SDatePickerDate selected={value === date.raw} onClick={() => setValue(date.raw)}>
             <SDatePickerDateWeekday>
               { date.weekday }
             </SDatePickerDateWeekday>
@@ -62,7 +58,7 @@ const DatePicker = (props: DatePickerProps): ReactElement => {
               { date.day }
             </SDatePickerDateDay>
           </SDatePickerDate>
-        </>
+        </React.Fragment>
       ));
       return rendered;
     }

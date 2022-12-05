@@ -1,11 +1,31 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 
-import { SHeader } from './Header.styled';
+import { useSelector } from 'react-redux';
 
-const Header = (): ReactElement => (
-  <SHeader>
-    Plan your trip!
-  </SHeader>
-);
+import { TStore } from '../../redux/store';
+
+import { SHeader, SLoader } from './Header.styled';
+
+const Header = (): ReactElement => {
+  const searchData = useSelector((state: TStore) => state.searchDataReducer);
+
+  const { loading } = searchData;
+  const [showLoader, setShowLoader] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (loading) {
+      setShowLoader(true);
+    } else {
+      setTimeout(() => setShowLoader(false), 200);
+    }
+  }, [loading]);
+
+  return (
+    <SHeader>
+      Plan your trip!
+      <SLoader show={showLoader} />
+    </SHeader>
+  );
+};
 
 export default Header;

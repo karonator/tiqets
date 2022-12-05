@@ -22,12 +22,12 @@ const SearchResults = (): ReactElement => {
           Select filters first
         </SSearchMessage>
       )}
-      {products?.length && products.length === 0 && (
+      {products?.length === 0 && (
         <SSearchMessage>
           No results found, please choose another date
         </SSearchMessage>
       )}
-      {products?.length && products.length > 0 && (
+      {products && products?.length > 0 && (
         <SSearchResults>
           {products.map((product) => <ProductCard key={product.id} product={product} />)}
         </SSearchResults>

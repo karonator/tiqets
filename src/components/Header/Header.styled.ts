@@ -8,3 +8,27 @@ export const SHeader = styled.header`
   padding: 64px 16px;
   text-align: center;
 `;
+
+export const SLoader = styled.div<{ show?: boolean }>`
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+
+  animation: spin 1.6s linear infinite;
+  border-radius: 50%;
+  border: 5px solid #FFF4;
+  border-top: 5px solid #FFF;
+  opacity: 0;
+  transition: 0.2s all;
+
+  ${({ show }) => show && `
+    opacity: 1;
+  `}
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
