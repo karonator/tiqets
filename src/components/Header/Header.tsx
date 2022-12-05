@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { SHeader } from './Header.styled';
 
-const Header = (): JSX.Element => (
+const Header = (): ReactElement => (
   <SHeader>
     Plan your trip!
   </SHeader>

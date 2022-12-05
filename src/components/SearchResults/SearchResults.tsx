@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 
 import { TStore } from '../../redux/store';
@@ -11,23 +11,23 @@ import {
   SSearchMessage
 } from './SearchResults.styled';
 
-const SearchResults = (): JSX.Element => {
+const SearchResults = (): ReactElement => {
   const searchData = useSelector((state: TStore) => state.searchDataReducer);
   const { products } = searchData;
 
   return (
     <SSearchResultsContainer>
-      {products === undefined && (
+      {!products && (
         <SSearchMessage>
           Select filters first
         </SSearchMessage>
       )}
-      {products !== undefined && products.length === 0 && (
+      {products?.length && products.length === 0 && (
         <SSearchMessage>
           No results found, please choose another date
         </SSearchMessage>
       )}
-      {products !== undefined && products.length > 0 && (
+      {products?.length && products.length > 0 && (
         <SSearchResults>
           {products.map((product) => <ProductCard key={product.id} product={product} />)}
         </SSearchResults>

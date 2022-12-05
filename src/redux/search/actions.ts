@@ -1,9 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
+import axiosInstance from '../../api/axios';
 import { IProduct } from '../../types';
-
-import axiosInstance from '../../services/axios';
 
 export type IRawLocationData = Record<string, Array<[number, string]>>;
 

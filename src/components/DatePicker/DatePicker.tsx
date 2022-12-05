@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, ReactElement } from 'react';
 
 import useWidth from '../../hooks/useWidth';
 
@@ -12,24 +12,14 @@ import {
   SDatePickerSeparator
 } from './DatePicker.styled';
 
-interface DatePickerProps {
-  label: string;
-  dates: string[];
-  disabled?: boolean;
+import {
+  DatePickerProps,
+  ParsedDate
+} from './interfaces';
 
-  value?: string;
-  setValue: (value?: string) => void;
-}
-
-interface ParsedDate {
-  day: number;
-  weekday: string;
-  raw: string;
-}
-
-const DatePicker = (props: DatePickerProps): JSX.Element => {
+const DatePicker = (props: DatePickerProps): ReactElement => {
   const container = useRef<HTMLDivElement>(null);
-  const [containerWidth] = useWidth(container);
+  const containerWidth = useWidth(container);
 
   const {
     label,
@@ -52,28 +42,28 @@ const DatePicker = (props: DatePickerProps): JSX.Element => {
     return parsed;
   };
 
-  const renderDates = (): JSX.Element[] => {
+  const renderDates = (): ReactElement[] => {
     if (containerWidth) {
       const minItemSize = 375 / 4 - 10;
       const itemCount = Math.max(3, Math.floor(containerWidth / minItemSize));
 
       const rendered = parseDates(dates).slice(0, itemCount).map((date: ParsedDate) => (
-        <SDatePickerDate
-          key={date.raw}
-          selected={value === date.raw}
-          onClick={() => setValue(date.raw)}
-        >
-          <SDatePickerDateWeekday>
-            { date.weekday }
-          </SDatePickerDateWeekday>
-          <SDatePickerDateDay>
-            { date.day }
-          </SDatePickerDateDay>
-        </SDatePickerDate>
+        <>
+          {date.day === 1 && <SDatePickerSeparator />}
+          <SDatePickerDate
+            key={date.raw}
+            selected={value === date.raw}
+            onClick={() => setValue(date.raw)}
+          >
+            <SDatePickerDateWeekday>
+              { date.weekday }
+            </SDatePickerDateWeekday>
+            <SDatePickerDateDay>
+              { date.day }
+            </SDatePickerDateDay>
+          </SDatePickerDate>
+        </>
       ));
-      if (itemCount > 3) {
-        rendered.splice(3, 0, <SDatePickerSeparator key="separator" />);
-      }
       return rendered;
     }
     return [];

@@ -1,18 +1,18 @@
 import { useState, useCallback, useEffect } from 'react';
 
-const useClampedText = (
+interface UseClampedTextParams {
   elementRef: React.RefObject<HTMLHeadingElement>,
   text: string,
   lines: number
-):(
-  string | null
-  )[] => {
+}
+
+const useClampedText = ({ elementRef, text, lines }: UseClampedTextParams):(string | null) => {
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
   const [lineHeight, setLineHeight] = useState<number | null>(null);
   const [clampedText, setClampedText] = useState<string>(text);
 
   const getHeight = useCallback(() => {
-    if (elementRef && elementRef.current) {
+    if (elementRef?.current) {
       if (!lineHeight) {
         const styles = window.getComputedStyle(elementRef.current);
         setLineHeight(parseInt(styles.lineHeight, 10));
@@ -25,14 +25,15 @@ const useClampedText = (
   useEffect(() => {
     if (CSS.supports('-webkit-line-clamp', '1')) {
       setClampedText(text);
-    } else {
-      getHeight();
-      window.addEventListener('resize', getHeight);
-      return () => {
-        window.removeEventListener('resize', getHeight);
-      };
+      return undefined;
     }
-    return undefined;
+
+    getHeight();
+    window.addEventListener('resize', getHeight);
+
+    return () => {
+      window.removeEventListener('resize', getHeight);
+    };
   }, [getHeight]);
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const useClampedText = (
     }
   }, [lineHeight, containerHeight]);
 
-  return [clampedText];
+  return clampedText;
 };
 
 export default useClampedText;

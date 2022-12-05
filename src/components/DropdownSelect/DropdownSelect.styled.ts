@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import arrow from '../../img/arrow.svg';
+import arrow from '../../assets/icons/arrow.svg';
 
 export const SDropdown = styled.div<{ disabled?: boolean }>`
   display: flex;

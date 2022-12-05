@@ -1,10 +1,10 @@
 import { useState, useCallback, useEffect } from 'react';
 
-const useWidth = (elementRef: React.RefObject<HTMLDivElement>):(number | null)[] => {
+const useWidth = (elementRef: React.RefObject<HTMLDivElement>):(number | null) => {
   const [resultWidth, setResultWidth] = useState<number | null>(null);
 
   const updateWidth = useCallback(() => {
-    if (elementRef && elementRef.current) {
+    if (elementRef?.current) {
       const { width } = elementRef.current.getBoundingClientRect();
       setResultWidth(width);
     }
@@ -19,7 +19,7 @@ const useWidth = (elementRef: React.RefObject<HTMLDivElement>):(number | null)[]
     };
   }, [updateWidth]);
 
-  return [resultWidth];
+  return resultWidth;
 };
 
 export default useWidth;

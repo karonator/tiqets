@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 
 import { TStore } from '../../redux/store';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 import {
   fetchProducts,
@@ -19,7 +19,7 @@ import {
 import DropdownSelect from '../DropdownSelect';
 import DatePicker from '../DatePicker';
 
-const SearchForm = (): JSX.Element => {
+const SearchForm = (): ReactElement => {
   const dispatch = useAppDispatch();
   const searchData = useSelector((state: TStore) => state.searchDataReducer);
   const {
@@ -40,6 +40,10 @@ const SearchForm = (): JSX.Element => {
     }
   }, [selectedCity, selectedDate]);
 
+  const handleSelectCountry = useCallback((val) => dispatch(setSelectedCountry(val)), []);
+  const handleSelectCity = useCallback((val) => dispatch(setSelectedCity(val)), []);
+  const handleSelectDate = useCallback((val) => dispatch(setSelectedDate(val)), []);
+
   return (
     <SSearchForm>
       <SSearchFormRow>
@@ -47,19 +51,18 @@ const SearchForm = (): JSX.Element => {
           id="country"
           label="Country"
           selectValueTitle="Choose the country"
-          options={countries.map((country) => ({ title: country.name, value: country.name }))}
+          options={countries.map(({ name }) => ({ title: name, value: name }))}
           value={selectedCountry}
-          setValue={(val) => dispatch(setSelectedCountry(val))}
+          setValue={handleSelectCountry}
         />
-
         <DropdownSelect
           id="country"
           label="City"
           selectValueTitle="Choose the city"
-          options={cities.map((city) => ({ title: city.name, value: city.id }))}
+          options={cities.map(({ id, name }) => ({ title: name, value: id }))}
           disabled={selectedCountry === undefined}
           value={selectedCity}
-          setValue={(val) => dispatch(setSelectedCity(val))}
+          setValue={handleSelectCity}
         />
       </SSearchFormRow>
       <SSearchFormRow>
@@ -68,7 +71,7 @@ const SearchForm = (): JSX.Element => {
           dates={dates}
           disabled={selectedCity === undefined}
           value={selectedDate}
-          setValue={(val) => dispatch(setSelectedDate(val))}
+          setValue={handleSelectDate}
         />
       </SSearchFormRow>
     </SSearchForm>

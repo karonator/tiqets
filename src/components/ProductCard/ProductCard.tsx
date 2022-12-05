@@ -1,6 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
-
-import { IProduct } from '../../types';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  ReactElement
+} from 'react';
 
 import useClampedText from '../../hooks/useClampedText';
 
@@ -11,11 +14,11 @@ import {
   SProductPriceWrapper, SProductPrice, SProductPriceDiscount
 } from './ProductCard.styled';
 
-interface SearchResultsProps {
-  product: IProduct;
-}
+import {
+  SearchResultsProps
+} from './interfaces';
 
-const SearchResults = ({ product }: SearchResultsProps): JSX.Element => {
+const SearchResults = ({ product }: SearchResultsProps): ReactElement => {
   const {
     title,
     summary,
@@ -27,7 +30,11 @@ const SearchResults = ({ product }: SearchResultsProps): JSX.Element => {
   const productCardRef = useRef<HTMLDivElement>(null);
 
   const descriptionTextRef = useRef<HTMLHeadingElement>(null);
-  const shortenedSummary = useClampedText(descriptionTextRef, summary, 2);
+  const shortenedSummary = useClampedText({
+    elementRef: descriptionTextRef,
+    text: summary,
+    lines: 2
+  });
 
   const [shouldLoadImage, setShouldLoadImage] = useState<boolean>(false);
 
@@ -66,7 +73,7 @@ const SearchResults = ({ product }: SearchResultsProps): JSX.Element => {
               €{ discountedPrice.toFixed(2) }
             </SProductPriceDiscount>
           )}
-          <SProductPrice discounted={discountedPrice !== undefined}>
+          <SProductPrice discounted={!!discountedPrice}>
             €{ price.toFixed(2) }
           </SProductPrice>
         </SProductPriceWrapper>

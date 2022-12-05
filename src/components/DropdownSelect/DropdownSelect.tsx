@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import {
   SDropdown,
@@ -6,23 +6,11 @@ import {
   SDropdownSelect
 } from './DropdownSelect.styled';
 
-interface DropdownOption {
-  title: string;
-  value: string;
-}
+import {
+  DropdownSelectProps
+} from './interfaces';
 
-interface DropdownSelectProps {
-  id: string;
-  label: string;
-  selectValueTitle: string;
-  options: DropdownOption[];
-  disabled?: boolean;
-
-  value?: string;
-  setValue: (value?: string) => void;
-}
-
-const DropdownSelect = (props: DropdownSelectProps): JSX.Element => {
+const DropdownSelect = (props: DropdownSelectProps): ReactElement => {
   const {
     id,
     label,

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { SFooter } from './Footer.styled';
 
-const Footer = (): JSX.Element => (
+const Footer = (): ReactElement => (
   <SFooter>
-    © 2014-2022 Tiqets Amsterdam
+    © 2014-{new Date().getFullYear()} Tiqets Amsterdam
   </SFooter>
 );
 
