@@ -12,25 +12,38 @@ export const SProduct = styled.div`
   }
 `;
 
-export const SProductImage = styled.img`
-  background: #DDD;
+export const SProductImageWrapper = styled.div`
   aspect-ratio: 3/4;
+  background: #DDD;
+  flex: 0;
   height: 100%;
+  position: relative;
   
   @media (min-width: 600px) {
     aspect-ratio: 3/2;
     width: 100%;
+    flex: unset;
   }
+`;
+
+export const SProductImage = styled.img`
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  width: 100%;
 `;
 
 export const SProductImagePlaceholder = styled.div`
   background: #DDD;
   aspect-ratio: 3/4;
   height: 100%;
-  
+  flex: 0;
+
   @media (min-width: 600px) {
     aspect-ratio: 3/2;
     width: 100%;
+    flex: unset;
   }
 `;
 
@@ -39,15 +52,65 @@ export const SProductContent = styled.div`
 `;
 
 export const SProductTitle = styled.h3`
-  font: normal 500 18px 'Roboto Mono', Verdana;
-  line-height: 24px;
-  margin: 0 0 8px 0;
-  height: 48px;
+  font: normal 500 16px 'Roboto Mono', Verdana;
+  line-height: 20px;
+  margin-bottom: 8px;
+  min-height: 40px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  @media (min-width: 600px) {
+    font: normal 500 18px 'Roboto Mono', Verdana;
+    line-height: 24px;
+    min-height: 48px;
+  }
 `;
 
 export const SProductDescription = styled.p`
   font: normal 400 12px 'Roboto Mono', Verdana;
   line-height: 16px;
-  margin: 0 0 16px 0;
-  height: 32px;
+  margin-bottom: 12px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  @media (min-width: 600px) {
+    margin-bottom: 16px;
+  }
+`;
+
+export const SProductPriceWrapper = styled.div`
+  display: flex;
+`;
+
+const SProductPriceBase = styled.p`
+  font: normal 500 14px 'Roboto Mono', Verdana;
+  line-height: 20px;
+
+  @media (min-width: 600px) {
+    font: normal 500 16px 'Roboto Mono', Verdana;
+    line-height: 24px;
+  }
+`;
+
+export const SProductPrice = styled(SProductPriceBase)<{ discounted?: boolean }>`
+  ${({ discounted }) => discounted && `
+    font: normal 400 14px 'Roboto Mono', Verdana;
+    color: #555;
+    text-decoration: line-through;
+
+    @media (min-width: 600px) {
+      line-height: 24px;
+    }
+  `}
+`;
+
+export const SProductPriceDiscount = styled(SProductPriceBase)`
+  color: #B00;
+  margin-right: 8px;
 `;

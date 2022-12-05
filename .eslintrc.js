@@ -28,7 +28,8 @@ module.exports = {
     "import/prefer-default-export": "off",
     "no-restricted-exports": "off",
     "no-param-reassign": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "react/jsx-one-expression-per-line": "off"
   },
   extends: [
     "eslint-config-airbnb",

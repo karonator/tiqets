@@ -1,7 +1,9 @@
 export interface IProduct {
   id: number;
   title: string;
-  image: string;
-  price: string;
   summary: string;
+  image: string;
+  price: number;
+  discountedPrice?: number;
+  discount_percentage?: number;
 }

@@ -98,7 +98,11 @@ const searchDataSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, { payload }: PayloadAction<IProduct[]>) => {
         state.loading = false;
-        state.products = payload;
+        state.products = payload.map((product) => ({
+          ...product,
+          // eslint-disable-next-line max-len
+          discountedPrice: product.discount_percentage ? product.price * (1 - product.discount_percentage / 100) : undefined
+        }));
       })
       .addCase(fetchProducts.rejected, (state, action: PayloadAction<unknown>) => {
         state.loading = false;
