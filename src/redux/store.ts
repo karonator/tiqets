@@ -7,6 +7,11 @@ const store = configureStore({
   devTools: false
 });
 
+export const testStoreBuilder = () => configureStore({
+  reducer: rootReducer,
+  devTools: false
+});
+
 export type TStore = ReturnType<typeof store.getState>;
 
 export default store;
