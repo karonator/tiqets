@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   ICountry,
   ICity,
+  IRawProduct,
   IProduct
 } from '../../types';
 
@@ -96,12 +97,18 @@ const searchDataSlice = createSlice({
       .addCase(fetchProducts.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchProducts.fulfilled, (state, { payload }: PayloadAction<IProduct[]>) => {
+      .addCase(fetchProducts.fulfilled, (state, { payload }: PayloadAction<IRawProduct[]>) => {
         state.loading = false;
-        state.products = payload.map((product) => ({
-          ...product,
-          // eslint-disable-next-line max-len
-          discountedPrice: product.discount_percentage ? product.price * (1 - product.discount_percentage / 100) : undefined
+        state.products = payload.map(({
+          id, title, summary, image, price, product_url, discount_percentage
+        }: IRawProduct): IProduct => ({
+          id,
+          title,
+          summary,
+          image,
+          price,
+          discountedPrice: discount_percentage && (price * (1 - discount_percentage / 100)),
+          url: product_url
         }));
       })
       .addCase(fetchProducts.rejected, (state, action: PayloadAction<unknown>) => {

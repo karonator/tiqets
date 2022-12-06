@@ -24,10 +24,11 @@ const SearchResults = ({ product }: SearchResultsProps): ReactElement => {
     summary,
     image,
     price,
-    discountedPrice
+    discountedPrice,
+    url
   } = product;
 
-  const productCardRef = useRef<HTMLDivElement>(null);
+  const productCardRef = useRef<HTMLAnchorElement>(null);
 
   const descriptionTextRef = useRef<HTMLHeadingElement>(null);
   const shortenedSummary = useClampedText({
@@ -54,7 +55,12 @@ const SearchResults = ({ product }: SearchResultsProps): ReactElement => {
   }, [shouldLoadImage, productCardRef]);
 
   return (
-    <SProduct ref={productCardRef}>
+    <SProduct
+      ref={productCardRef}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       {shouldLoadImage ? (
         <SProductImageWrapper>
           <SProductImage src={image} />

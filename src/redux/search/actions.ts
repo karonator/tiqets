@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import axiosInstance from '../../api/axios';
-import { IProduct } from '../../types';
+import { IRawProduct } from '../../types';
 
 export type IRawLocationData = Record<string, Array<[number, string]>>;
 
@@ -43,7 +43,7 @@ export const fetchProducts = createAsyncThunk(
   async (data: { city: string, date: string }, thunkApi) => {
     const { date, city } = data;
     try {
-      const response = await axiosInstance.get<IProduct[]>('/products', {
+      const response = await axiosInstance.get<IRawProduct[]>('/products', {
         params: {
           date,
           city_id: city

@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 
-export const SProduct = styled.div`
+export const SProduct = styled.a`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 0px 3px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   display: flex;
   flex-direction: row;
   overflow: hidden;
+  text-decoration: none;
+  transition: 0.2s all;
+
+  &:hover {
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2), 0px 0px 3px rgba(0, 0, 0, 0.4);
+  }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.screenSm}px) {
     flex-direction: column;
