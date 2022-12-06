@@ -37,3 +37,9 @@ I spent a lot of time for tests: I had problems with axios-mock-adapter, and it 
 - Think a bit more about components folders/architecture
 - Add react router
 - Fully cover code by tests & more complex tests
+
+**Final words**
+
+- For easy testing you can use just `npm install` and `npm run start`
+- App should be available at http://localhost:3000/
+- Thank you for your time
