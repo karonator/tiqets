@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 
-interface UseClampedTextParams {
+export interface UseClampedTextParams {
   elementRef: React.RefObject<HTMLHeadingElement>,
   text: string,
   lines: number
