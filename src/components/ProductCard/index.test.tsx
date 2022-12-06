@@ -24,7 +24,8 @@ describe('Render <ProductCard />', () => {
     title: 'Test product',
     summary: 'Test product description',
     image: 'some url',
-    price: 10
+    price: 10,
+    url: 'some product url'
   };
 
   beforeEach(() => {
